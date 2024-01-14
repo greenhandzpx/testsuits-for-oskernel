@@ -1,0 +1,1 @@
+loongarch64-linux-gnu-gcc -march=loongarch64 -mabi=lp64d -fno-builtin -nostdinc -fno-stack-protector -ggdb -Wall -O3 -DNDEBUG  -nostdlib -T /home/zpx/code/testsuits-for-oskernel/riscv-syscalls-testing/user/lib/arch/loongarch64/user.ld -Ttext 0x1000 CMakeFiles/sleep.dir/src/oscomp/sleep.c.o -o loongarch64/sleep  libulib.a 

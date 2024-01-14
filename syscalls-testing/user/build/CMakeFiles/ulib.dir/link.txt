@@ -1,0 +1,2 @@
+/usr/bin/ar qc libulib.a CMakeFiles/ulib.dir/lib/arch/loongarch64/crt.S.o CMakeFiles/ulib.dir/lib/arch/loongarch64/clone.S.o CMakeFiles/ulib.dir/lib/main.c.o CMakeFiles/ulib.dir/lib/stdio.c.o CMakeFiles/ulib.dir/lib/stdlib.c.o CMakeFiles/ulib.dir/lib/string.c.o CMakeFiles/ulib.dir/lib/syscall.c.o
+loongarch64-linux-gnu-ranlib libulib.a
