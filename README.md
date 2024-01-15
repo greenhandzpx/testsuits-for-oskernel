@@ -20,6 +20,11 @@
 注：测试用例的数量会增加
 
 ## syscalls测试用例Qemu运行环境
-[syscalls测试用例 for Linux on Qemu RV64运行环境](riscv-linux-rootfs) ： 在Linux上运行测试用例主要是用于对比自己实现的OS
+
+在Linux上运行测试用例主要是用于对比自己实现的OS
+
+- [syscalls测试用例 for Linux on Qemu RV64运行环境](riscv-linux-rootfs)
+- 对于loongarch赛道的Linux QEMU环境，同学们可以参考[该博客](https://blog.csdn.net/mxcai2005/article/details/129631722)
+
 
 
