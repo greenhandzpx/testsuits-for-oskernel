@@ -66,4 +66,4 @@ pre:
 all: binary
 
 clean:
-	@rm -rf build target asm
+	@rm -rf build target asm $(ARCH)

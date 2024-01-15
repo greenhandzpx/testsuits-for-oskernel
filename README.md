@@ -1,6 +1,6 @@
 # Testsuits for OS Kernel
 
-这里给出的[syscalls测试用例](riscv-syscalls-testing/)会通过系统调用访问内核实现组开发的OS，得到正确可靠的服务。
+这里给出的[syscalls测试用例](syscalls-testing/)会通过系统调用访问内核实现组开发的OS，得到正确可靠的服务。
 系统调用基于部分比较基础的Linux syscalls。从测试用例可以看出，自己开发的OS只需实现Linux syscalls的功能子集即可。
 
 内核实现组可通过[syscalls测试用例 for Linux on Qemu RV64运行环境](riscv-linux-rootfs)了解测试用例在Linux on Qemu for RV64上的执行效果；
@@ -15,7 +15,7 @@
 注：初赛阶段，文档中描述不会增加更多的syscall。可能会进一步完善文档内容描述，保证描述的准确性。
 
 ## syscalls测试用例
-[syscalls测试用例](riscv-syscalls-testing/)
+[syscalls测试用例](syscalls-testing/)
 
 注：测试用例的数量会增加
 
