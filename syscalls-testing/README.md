@@ -1,4 +1,4 @@
-# riscv syscalls测试用例
+# syscalls简单测试用例
 
 ### 配置
 先把riscv或者loongarch的交叉编译链的路径放到环境变量PATH中，例如`export PATH=$PATH:/path/to/kendryte-toolchain/bin`
