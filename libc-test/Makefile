@@ -1,5 +1,6 @@
 MUSL_LIB?=/opt/riscv64--musl--bleeding-edge-2020.08-1/riscv64-buildroot-linux-musl/sysroot/lib64/
-PREFIX?=riscv64-buildroot-linux-musl-
+# PREFIX?=riscv64-buildroot-linux-musl-
+PREFIX?=loongarch64-linux-gnu-
 CC=$(PREFIX)gcc
 OBJCOPY=$(PREFIX)objcopy
 
@@ -89,7 +90,7 @@ disk: run-all.sh
 	cp entry-static.exe disk
 	cp runtest.exe disk
 	cp src/functional/*.so src/regression/*.so disk
-	cp $(MUSL_LIB)/libc.so disk
+	# cp $(MUSL_LIB)/libc.so disk
 	cp run-*.sh disk
 	# ls -lh disk/
 	# dd if=/dev/zero of=sdcard.img bs=1024K count=4

@@ -4,6 +4,7 @@ sdcard.img
 sdcard.img.gz
 oscomp-debian
 
+deps/openssl-3.2.0/build
 iozone/fileop
 iozone/iozone
 iozone/pit_server

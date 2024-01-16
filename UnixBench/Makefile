@@ -52,7 +52,8 @@ SHELL = /bin/sh
 # COMPILER CONFIGURATION: Set "CC" to the name of the compiler to use
 # to build the binary benchmarks.  You should also set "$cCompiler" in the
 # Run script to the name of the compiler you want to test.
-CC=riscv64-linux-gcc -static
+#CC=riscv64-linux-gcc -static
+CC=loongarch64-linux-gnu-gcc -static
 
 # OPTIMISATION SETTINGS:
 # Use gcc option if defined UB_GCC_OPTIONS via "Environment variable" or "Command-line arguments".
@@ -87,19 +88,19 @@ else
   ## OS detection.  Comment out if gmake syntax not supported by other 'make'. 
   OSNAME:=$(shell uname -s)
 #  ARCH := $(shell uname -m)
-  ARCH :=riscv64
-  ifeq ($(OSNAME),Linux)
-    # Not all CPU architectures support "-march" or "-march=native".
-    #   - Supported    : x86, x86_64, ARM, AARCH64, riscv64, etc..
-    #   - Not Supported: IBM Power, etc...
-    ifeq ($(ARCH),$(filter $(ARCH),ppc64 ppc64le))
-        OPTON += -mcpu=native -mtune=native
-    else ifeq ($(ARCH),riscv64)
-        OPTON += -march=rv64g -mabi=lp64
-    else
-        OPTON += -march=native -mtune=native
-    endif
-  endif
+#   ARCH :=riscv64
+#   ifeq ($(OSNAME),Linux)
+#     # Not all CPU architectures support "-march" or "-march=native".
+#     #   - Supported    : x86, x86_64, ARM, AARCH64, riscv64, etc..
+#     #   - Not Supported: IBM Power, etc...
+#     ifeq ($(ARCH),$(filter $(ARCH),ppc64 ppc64le))
+#         OPTON += -mcpu=native -mtune=native
+#     else ifeq ($(ARCH),riscv64)
+#         OPTON += -march=rv64g -mabi=lp64
+#     else
+#         OPTON += -march=native -mtune=native
+#     endif
+#   endif
 
   ifeq ($(OSNAME),Darwin)
     # (adjust flags or comment out this section for older versions of XCode or OS X)

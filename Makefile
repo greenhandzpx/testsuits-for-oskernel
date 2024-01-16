@@ -1,9 +1,15 @@
-NPROC = 16
-MUSL_PREFIX = riscv64-linux
-MUSL_GCC = $(MUSL_PREFIX)-gcc
-MUSL_STRIP = $(MUSL_PREFIX)-strip
+NPROC = 32
+# MUSL_PREFIX = riscv64-linux
+# Note that musl doesn't support loongarch now, so we use gnu
+MUSL_PREFIX = loongarch64-linux-gnu-
+MUSL_GCC = $(MUSL_PREFIX)gcc
+MUSL_STRIP = $(MUSL_PREFIX)strip
+OS = loongarch64
 
-build_all: busybox lua lmbench libctest iozone libc-bench netperf iperf unix-bench cyclictest time-test test_all true copy-file-range-test interrupts-test
+build_all: busybox lua lmbench iozone libc-bench netperf iperf unix-bench time-test test_all true copy-file-range-test interrupts-test
+
+deps: .PHONY
+	cd deps/openssl-3.2.0 && ./Configure --prefix=build --cross-compile-prefix=$(MUSL_PREFIX) linux64-loongarch64 && make -j$(NPROC) && make install
 
 busybox: .PHONY
 	cp busybox-config busybox/.config
@@ -19,13 +25,13 @@ lua: .PHONY
 	cp scripts/lua/* sdcard/
 
 lmbench: .PHONY
-	make -C lmbench build CC="riscv64-linux-gnu-gcc -static" OS=riscv64 -j $(NPROC)
-	riscv64-linux-gnu-strip lmbench/bin/riscv64/lmbench_all
-	# riscv64-linux-gnu-strip lmbench/bin/riscv64/hello
-	cp lmbench/bin/riscv64/lmbench_all sdcard/
-	cp lmbench/bin/riscv64/hello sdcard/
+	make -C lmbench build CC="$(MUSL_GCC) -static" OS=$(OS) -j $(NPROC)
+	$(MUSL_STRIP) lmbench/bin/$(OS)/lmbench_all
+	cp lmbench/bin/$(OS)/lmbench_all sdcard/
+	cp lmbench/bin/$(OS)/hello sdcard/
 	cp scripts/lmbench/* sdcard/
 
+# Only supported for musl
 libctest: .PHONY
 	make -C libc-test disk -j $(NPROC)
 	cp libc-test/disk/* sdcard/
@@ -49,16 +55,17 @@ unix-bench: .PHONY
 
 netperf: .PHONY
 	cd netperf && ./autogen.sh
-	cd netperf && ac_cv_func_setpgrp_void=yes ./configure --host riscv64 CC=$(MUSL_GCC) CFLAGS="-static"
+	cd netperf && ac_cv_func_setpgrp_void=yes ./configure --host loongarch64 CC=$(MUSL_GCC) CFLAGS="-static"
 	cd netperf && make -j $(NPROC)
 	cp netperf/src/netperf netperf/src/netserver sdcard/
 	cp scripts/netperf/* sdcard/
 
-iperf: .PHONY
-	cd iperf &&	./configure --host=riscv64-linux-musl CC=$(MUSL_GCC) --enable-static-bin --without-sctp && make
+iperf: deps .PHONY
+	cd iperf && ./configure --host=loongarch64-unknown-linux-gnu CC=$(MUSL_GCC) --enable-static-bin --without-sctp CFLAGS="-I$(CURDIR)/deps/openssl-3.2.0/build/include -L$(CURDIR)/deps/openssl-3.2.0/build/lib --static" && make
 	cp iperf/src/iperf3 sdcard/
 	cp scripts/iperf/iperf_testcode.sh sdcard/
 
+# Not supported yet for loongarch(maybe)
 cyclictest: .PHONY
 	make -C rt-tests cyclictest hackbench
 	cp rt-tests/cyclictest rt-tests/hackbench sdcard/

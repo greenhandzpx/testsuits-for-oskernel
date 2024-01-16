@@ -103,14 +103,14 @@ rpm:
 #
 hpux-11.0:	iozone_hpux-11.0.o libasync.o libbif.o
 	 $(CC) +O3 +Oparallel $(LDFLAGS) iozone_hpux-11.0.o libasync.o \
-		libbif.o -lpthread -lrt -o iozone
+		libbif.o -pthread -lrt -o iozone
 
 #
 # Turn on wide-mode, the optimizer, largefiles, Posix async I/O and threads.
 #
 hpux-11.0w:	iozone_hpux-11.0w.o libasyncw.o libbif.o
 	 $(CC) +DD64 +O3 $(LDFLAGS) iozone_hpux-11.0w.o libasyncw.o \
-		libbif.o -lpthread -lrt -o iozone
+		libbif.o -pthread -lrt -o iozone
 
 
 #
@@ -118,7 +118,7 @@ hpux-11.0w:	iozone_hpux-11.0w.o libasyncw.o libbif.o
 #
 hpuxs-11.0:	iozone_hpuxs-11.0.o libasync.o libbif.o fileop_hpuxs-11.0.o pit_server.o
 	 $(CC) -O $(LDFLAGS)  iozone_hpuxs-11.0.o \
-		libasync.o libbif.o -lpthread -lrt -o iozone
+		libasync.o libbif.o -pthread -lrt -o iozone
 	 $(CC) -O $(LDFLAGS) fileop_hpuxs-11.0.o -o fileop
 	 $(CC) -O $(LDFLAGS) pit_server.o -o pit_server
 
@@ -127,7 +127,7 @@ hpuxs-11.0:	iozone_hpuxs-11.0.o libasync.o libbif.o fileop_hpuxs-11.0.o pit_serv
 #
 hpuxs-11.0w:	iozone_hpuxs-11.0w.o libasyncw.o libbif.o
 	 $(CC) -O +DD64 $(LDFLAGS) iozone_hpuxs-11.0w.o \
-		libasyncw.o libbif.o -lpthread -lrt -o iozone
+		libasyncw.o libbif.o -pthread -lrt -o iozone
 
 #
 # Simple 10.1 build with no threads, no largefiles, no async I/O 
@@ -172,7 +172,7 @@ hpux_no_ansi:	iozone_hpux_no.o  libbif.o
 # GNU 'C' compiler Linux build with threads, largefiles, async I/O 
 #
 linux:	iozone_linux.o libasync.o libbif.o fileop_linux.o pit_server.o
-	$(CC)  -O3 $(CFLAGS) iozone_linux.o libasync.o libbif.o -lpthread \
+	$(CC)  -O3 $(CFLAGS) iozone_linux.o libasync.o libbif.o -pthread \
 		-lrt -o iozone
 	$(CC)  -O3 $(CFLAGS) -Dlinux fileop_linux.o -o fileop
 	$(CC)  -O3 $(CFLAGS) -Dlinux pit_server.o -o pit_server
@@ -182,7 +182,7 @@ linux:	iozone_linux.o libasync.o libbif.o fileop_linux.o pit_server.o
 #
 linux-powerpc: iozone_linux-powerpc.o  libbif.o libasync.o fileop_linux-ppc.o pit_server.o
 	$(CC) -O3 $(LDFLAGS) iozone_linux-powerpc.o libasync.o \
-		libbif.o -lpthread  -lrt -o iozone
+		libbif.o -pthread  -lrt -o iozone
 	$(CC)  -O3 -Dlinux fileop_linux-ppc.o -o fileop
 	$(CC)  -O3 -Dlinux pit_server.o -o pit_server
 #
@@ -190,7 +190,7 @@ linux-powerpc: iozone_linux-powerpc.o  libbif.o libasync.o fileop_linux-ppc.o pi
 #
 linux-sparc: iozone_linux-sparc.o  libbif.o libasync.o fileop_linux.o pit_server.o
 	$(CC) -O3 $(LDFLAGS) iozone_linux-sparc.o libasync.o libbif.o \
-		-lpthread -lrt -o iozone
+		-pthread -lrt -o iozone
 	$(CC) -O3 -Dlinux fileop_linux.o -o fileop
 	$(CC) -O3 -Dlinux pit_server.o -o pit_server
 
@@ -199,7 +199,7 @@ linux-sparc: iozone_linux-sparc.o  libbif.o libasync.o fileop_linux.o pit_server
 #
 linux-ia64:	iozone_linux-ia64.o  libbif.o libasync.o fileop_linux-ia64.o pit_server.o
 	$(CC) -O3 $(LDFLAGS) iozone_linux-ia64.o libbif.o libasync.o \
-		-lrt -lpthread -o iozone
+		-lrt -pthread -o iozone
 	$(CC)  -O3 -Dlinux fileop_linux-ia64.o -o fileop
 	$(CC)  -O3 -Dlinux pit_server.o -o pit_server
 
@@ -209,7 +209,7 @@ linux-ia64:	iozone_linux-ia64.o  libbif.o libasync.o fileop_linux-ia64.o pit_ser
 linux-powerpc64: iozone_linux-powerpc64.o  libbif.o libasync.o fileop_linux-ppc64.o pit_server-linux-powerpc64.o
 	$(CC) -O3 -Dunix -DHAVE_ANSIC_C -DSHARED_MEM -DASYNC_IO \
 		-D_LARGEFILE64_SOURCE -Dlinux \
-		iozone_linux-powerpc64.o libasync.o libbif.o -lpthread \
+		iozone_linux-powerpc64.o libasync.o libbif.o -pthread \
 		-lrt $(FLAG64BIT) -o iozone
 	$(CC)  -O3 -Dlinux fileop_linux-ppc64.o $(FLAG64BIT) -o fileop
 	$(CC)  -O3 -Dlinux pit_server-linux-powerpc64.o $(FLAG64BIT) -o pit_server
@@ -219,7 +219,7 @@ linux-powerpc64: iozone_linux-powerpc64.o  libbif.o libasync.o fileop_linux-ppc6
 #
 linux-arm:	iozone_linux-arm.o  libbif.o libasync.o fileop_linux-arm.o pit_server.o
 	$(CC) -O3 $(LDFLAGS) iozone_linux-arm.o libbif.o libasync.o \
-		-lrt -lpthread -o iozone
+		-lrt -pthread -o iozone
 	$(CC) -O3 -Dlinux fileop_linux-arm.o -o fileop
 	$(CC) -O3 -Dlinux pit_server.o -o pit_server
 #
@@ -251,7 +251,7 @@ endif
 #
 linux-AMD64:	iozone_linux-AMD64.o  libbif.o libasync.o fileop_linux-AMD64.o pit_server.o
 	$(CC)  -O3 $(LDFLAGS) iozone_linux-AMD64.o libbif.o libasync.o \
-		-lrt -lpthread -o iozone
+		-lrt -pthread -o iozone
 	$(CC)  -O3 -Dlinux fileop_linux-AMD64.o -o fileop
 	$(CC)  -O3 -Dlinux pit_server.o -o pit_server
 
@@ -259,7 +259,7 @@ linux-AMD64:	iozone_linux-AMD64.o  libbif.o libasync.o fileop_linux-AMD64.o pit_
 # GNU 'C' compiler Linux build with S/390, threads, largfiles, async I/O
 #
 linux-S390:	iozone_linux-s390.o libbif.o libasync.o fileop_linux-s390.o pit_server.o
-	$(CC)  -O2 $(LDFLAGS) -lpthread -lrt iozone_linux-s390.o \
+	$(CC)  -O2 $(LDFLAGS) -pthread -lrt iozone_linux-s390.o \
 		libbif.o libasync.o -o iozone
 	$(CC)  -O3 -Dlinux fileop_linux-s390.o -o fileop
 	$(CC)  -O3 -Dlinux pit_server.o -o pit_server
@@ -268,7 +268,7 @@ linux-S390:	iozone_linux-s390.o libbif.o libasync.o fileop_linux-s390.o pit_serv
 # GNU 'C' compiler Linux build with S/390, threads, largfiles, async I/O
 #
 linux-S390X:	iozone_linux-s390x.o libbif.o libasync.o fileop_linux-s390x.o pit_server.o
-	$(CC)  -O2 $(LDFLAGS) -lpthread -lrt iozone_linux-s390x.o \
+	$(CC)  -O2 $(LDFLAGS) -pthread -lrt iozone_linux-s390x.o \
 		libbif.o libasync.o -o iozone
 	$(CC)  -O3 -Dlinux fileop_linux-s390x.o -o fileop
 	$(CC)  -O3 -Dlinux pit_server.o -o pit_server
@@ -282,7 +282,7 @@ linux-S390X:	iozone_linux-s390x.o libbif.o libasync.o fileop_linux-s390x.o pit_s
 # 
 AIX:	iozone_AIX.o  libbif.o  fileop_AIX.o
 	$(CC)  -O $(LDFLAGS) iozone_AIX.o libbif.o \
-		-lpthreads -o iozone
+		-pthreads -o iozone
 	$(CC)  -O -Dlinux fileop_AIX.o -o fileop
 
 # 
@@ -293,7 +293,7 @@ AIX:	iozone_AIX.o  libbif.o  fileop_AIX.o
 # 
 AIX-LF:	iozone_AIX-LF.o  libbif.o   fileop_AIX-LF.o pit_server.o
 	$(CC)  -O $(LDFLAGS) iozone_AIX-LF.o libbif.o \
-		-lpthreads -o iozone
+		-pthreads -o iozone
 	$(CC)  -O fileop_AIX-LF.o -o fileop
 	$(CC)  -O pit_server.o -o pit_server
 
@@ -303,7 +303,7 @@ AIX-LF:	iozone_AIX-LF.o  libbif.o   fileop_AIX-LF.o pit_server.o
 #
 AIX64:        iozone_AIX64.o libbif.o fileop_AIX64.o libasync.o pit_server.o
 	$(GCC) -maix64 -O3 $(LDFLAGS) iozone_AIX64.o libasync.o \
-              libbif.o -lpthreads -o iozone
+              libbif.o -pthreads -o iozone
 	$(GCC) -maix64 -O3 $(LDFLAGS) -Dlinux fileop_AIX64.o -o fileop
 	$(GCC) -maix32 -O3 $(LDFLAGS) pit_server.o -o pit_server
 
@@ -314,7 +314,7 @@ AIX64:        iozone_AIX64.o libbif.o fileop_AIX64.o libasync.o pit_server.o
 #
 AIX64-LF:     iozone_AIX64-LF.o libbif.o fileop_AIX64-LF.o libasync.o pit_server.o
 	$(GCC) -maix64 -O3 $(LDFLAGS) iozone_AIX64-LF.o libasync.o \
-              libbif.o -lpthreads -o iozone
+              libbif.o -pthreads -o iozone
 	$(GCC) -maix64 -O3 $(LDFLAGS) -Dlinux fileop_AIX64-LF.o -o fileop
 	$(GCC) -maix32 -O3 $(LDFLAGS) pit_server.o -o pit_server
 
@@ -325,14 +325,14 @@ AIX64-LF:     iozone_AIX64-LF.o libbif.o fileop_AIX64-LF.o libasync.o pit_server
 #
 IRIX64:	iozone_IRIX64.o libasyncw.o libbif.o 
 	$(CC)   -32 -O $(LDFLAGS) iozone_IRIX64.o libbif.o \
-		-lpthread libasyncw.o -o iozone
+		-pthread libasyncw.o -o iozone
 
 #
 # IRIX 32 bit build with threads, No largefiles, and async I/O 
 # This version uses the 32 bit interfaces and is compiled as 32 bit code
 #
 IRIX:	iozone_IRIX.o libasync.o libbif.o
-	$(CC)  -O  -32 $(LDFLAGS) iozone_IRIX.o libbif.o -lpthread \
+	$(CC)  -O  -32 $(LDFLAGS) iozone_IRIX.o libbif.o -pthread \
 		libasync.o -o iozone
 
 #
@@ -341,7 +341,7 @@ IRIX:	iozone_IRIX.o libasync.o libbif.o
 #
 CrayX1:	iozone_CrayX1.o libasync.o libbif.o
 	$(CC)  -O  $(LDFLAGS) iozone_CrayX1.o libbif.o \
-		-lpthread libasyncw.o -o iozone
+		-pthread libasyncw.o -o iozone
 
 #
 # SPP-UX 32 bit build with threads, No largefiles, and No async I/O, 
@@ -350,7 +350,7 @@ CrayX1:	iozone_CrayX1.o libasync.o libbif.o
 #
 sppux:	iozone_sppux.o  libbif.o
 	$(NACC)  -O $(LDFLAGS) iozone_sppux.o  libbif.o \
-	-Wl,+parallel -lcnx_syscall -lpthread -lail -o iozone
+	-Wl,+parallel -lcnx_syscall -pthread -lail -o iozone
 
 #
 # SPP-UX 32 bit build with threads, No largefiles, and No async I/O, pread 
@@ -359,7 +359,7 @@ sppux:	iozone_sppux.o  libbif.o
 #
 sppux-10.1:	iozone_sppux-10.1.o libbif.o
 	$(NACC) -O $(LDFLAGS) iozone_sppux-10.1.o libbif.o \
-	 -lcnx_syscall  -Wl,+parallel -lpthread -lail -o iozone
+	 -lcnx_syscall  -Wl,+parallel -pthread -lail -o iozone
 
 #
 # SPP-UX 32 bit build with threads, No largefiles, and No async I/O, pread 
@@ -369,7 +369,7 @@ sppux-10.1:	iozone_sppux-10.1.o libbif.o
 sppux_no_ansi-10.1:	iozone_sppux_no-10.1.o libbif.o
 	$(CCS)  -O $(LDFLAGS) iozone_sppux_no-10.1.o libbif.o \
 		-Wl,+parallel -lcnx_syscall  \
-		-lpthread -lail -o iozone
+		-pthread -lail -o iozone
 
 #
 # Convex 'C' series 32 bit build with No threads, No largefiles, and No async I/O
@@ -382,10 +382,10 @@ convex:	iozone_convex.o libbif.o
 #
 Solaris:	iozone_solaris.o libasync.o libbif.o fileop_Solaris.o pit_server.o
 	$(CC)  -O $(LDFLAGS) iozone_solaris.o libasync.o libbif.o \
-		-lthread -lpthread -lposix4 -lnsl -laio -lsocket \
+		-lthread -pthread -lposix4 -lnsl -laio -lsocket \
 		-o iozone
 	$(CC)  -O fileop_Solaris.o -o fileop
-	$(CC)  -O pit_server.o -lthread -lpthread -lposix4 -lnsl -laio \
+	$(CC)  -O pit_server.o -lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o pit_server
 
 #
@@ -393,17 +393,17 @@ Solaris:	iozone_solaris.o libasync.o libbif.o fileop_Solaris.o pit_server.o
 #
 Solaris7gcc:	iozone_solaris7gcc.o libasync7.o libbif7.o 
 	$(GCC)  -O $(LDFLAGS) iozone_solaris7gcc.o libasync7.o libbif7.o \
-		-lthread -lpthread -lposix4 -lnsl -laio \
+		-lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o iozone
 #
 # Solaris 32 bit build with threads, largefiles, and async I/O
 #
 Solaris10:	iozone_solaris10.o libasync10.o libbif10.o fileop_Solaris10.o pit_server.o
 	$(CC)  -O $(LDFLAGS) iozone_solaris10.o libasync10.o libbif10.o \
-		-lthread -lpthread -lposix4 -lnsl -laio \
+		-lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o iozone
 	$(CC)  -O fileop_Solaris10.o -o fileop
-	$(CC)  -O pit_server.o -lthread -lpthread -lposix4 -lnsl -laio \
+	$(CC)  -O pit_server.o -lthread -pthread -lposix4 -lnsl -laio \
                 -lsocket -o pit_server
 
 #
@@ -411,10 +411,10 @@ Solaris10:	iozone_solaris10.o libasync10.o libbif10.o fileop_Solaris10.o pit_ser
 #
 Solaris10cc:	iozone_solaris10cc.o libasync10cc.o libbif10cc.o fileop_Solaris10cc.o pit_server.o
 	$(CC)  -O $(LDFLAGS) iozone_solaris10cc.o libasync10cc.o libbif10cc.o \
-		-lthread -lpthread -lposix4 -lnsl -laio \
+		-lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o iozone
 	$(CC)  -O fileop_Solaris10cc.o -o fileop
-	$(CC)  -O pit_server.o -lthread -lpthread -lposix4 -lnsl -laio \
+	$(CC)  -O pit_server.o -lthread -pthread -lposix4 -lnsl -laio \
                 -lsocket -o pit_server
 
 #
@@ -422,10 +422,10 @@ Solaris10cc:	iozone_solaris10cc.o libasync10cc.o libbif10cc.o fileop_Solaris10cc
 #
 Solaris10gcc:	iozone_solaris10gcc.o libasync10.o libbif10.o fileop_Solaris10gcc.o pit_server_solaris10gcc.o
 	$(GCC)  -O $(LDFLAGS) iozone_solaris10gcc.o libasync10.o libbif10.o \
-		-lthread -lpthread -lposix4 -lnsl -laio \
+		-lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o iozone
 	$(GCC)  -O fileop_Solaris10gcc.o -o fileop
-	$(GCC)  -O pit_server_solaris10gcc.o -lthread -lpthread -lposix4 -lnsl -laio \
+	$(GCC)  -O pit_server_solaris10gcc.o -lthread -pthread -lposix4 -lnsl -laio \
                 -lsocket -o pit_server
 
 #
@@ -433,10 +433,10 @@ Solaris10gcc:	iozone_solaris10gcc.o libasync10.o libbif10.o fileop_Solaris10gcc.
 #
 Solaris10gcc-64:	iozone_solaris10gcc-64.o libasync10-64.o libbif10-64.o fileop_Solaris10gcc-64.o pit_server_solaris10gcc-64.o
 	$(GCC)  -O $(LDFLAGS) $(S10GCCFLAGS) iozone_solaris10gcc-64.o libasync10-64.o libbif10-64.o \
-		-lthread -lpthread -lposix4 -lnsl -laio \
+		-lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o iozone
 	$(GCC)  -O $(S10GCCFLAGS) fileop_Solaris10gcc-64.o -o fileop
-	$(GCC)  -O $(S10GCCFLAGS) pit_server_solaris10gcc-64.o -lthread -lpthread -lposix4 \
+	$(GCC)  -O $(S10GCCFLAGS) pit_server_solaris10gcc-64.o -lthread -pthread -lposix4 \
 		-lnsl -laio -lsocket -o pit_server
 
 
@@ -445,10 +445,10 @@ Solaris10gcc-64:	iozone_solaris10gcc-64.o libasync10-64.o libbif10-64.o fileop_S
 #
 Solaris10cc-64:	iozone_solaris10cc-64.o libasync10-64.o libbif10-64.o fileop_Solaris10cc-64.o pit_server.o
 	$(CC)  -O $(LDFLAGS) $(S10CCFLAGS) iozone_solaris10cc-64.o libasync10-64.o libbif10-64.o \
-              -lthread -lpthread -lposix4 -lnsl -laio \
+              -lthread -pthread -lposix4 -lnsl -laio \
               -lsocket -o iozone
 	$(CC)  -O $(S10CCFLAGS) fileop_Solaris10cc-64.o -o fileop
-	$(CC)  -O $(S10CCFLAGS) pit_server.o -lthread -lpthread -lposix4 \
+	$(CC)  -O $(S10CCFLAGS) pit_server.o -lthread -pthread -lposix4 \
 		-lnsl -laio -lsocket -o pit_server
 
 
@@ -465,7 +465,7 @@ Solaris-2.6:	iozone_solaris-2.6.o libbif.o
 #
 Solaris8-64: iozone_solaris8-64.o libasync.o libbif.o
 	$(CC) $(LDFLAGS) -fast -xtarget=generic64 -v iozone_solaris8-64.o \
-		libasync.o libbif.o -lthread -lpthread -lposix4 -lnsl -laio \
+		libasync.o libbif.o -lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o iozone
 
 #
@@ -474,7 +474,7 @@ Solaris8-64: iozone_solaris8-64.o libasync.o libbif.o
 Solaris8-64-VXFS: iozone_solaris8-64-VXFS.o libasync.o libbif.o
 	$(CC) $(LDFLAGS) -fast -xtarget=generic64 -v -I/opt/VRTSvxfs/include/ 
 		iozone_solaris8-64-VXFS.o libasync.o libbif.o \
-		-lthread -lpthread -lposix4 -lnsl -laio \
+		-lthread -pthread -lposix4 -lnsl -laio \
 		-lsocket -o iozone
 
 #
@@ -518,13 +518,13 @@ bsdi:	iozone_bsdi.o libbif.o fileop_bsdi.o pit_server.o
 #
 
 freebsd:	iozone_freebsd.o libbif.o fileop_freebsd.o libasync.o pit_server.o
-	$(CC) $(LDFLAGS) iozone_freebsd.o libbif.o -lpthread libasync.o \
+	$(CC) $(LDFLAGS) iozone_freebsd.o libbif.o -pthread libasync.o \
 		-o iozone
 	$(CC)  -O fileop_freebsd.o -o fileop
 	$(CC)  -O pit_server.o -o pit_server
 
 freebsd64:	iozone_freebsd64.o libbif.o fileop_freebsd64.o libasync.o pit_server.o
-	$(CC) $(LDFLAGS) iozone_freebsd64.o libbif.o -lpthread libasync.o \
+	$(CC) $(LDFLAGS) iozone_freebsd64.o libbif.o -pthread libasync.o \
 		-o iozone
 	$(CC)  -O fileop_freebsd64.o -o fileop
 	$(CC)  -O pit_server.o -o pit_server
@@ -570,7 +570,7 @@ openbsd-threads:	iozone_openbsd-threads.o libbif.o
 
 OSFV3:	iozone_OSFV3.o libbif.o libasync.o
 	$(CC) -O $(LDFLAGS) iozone_OSFV3.o libbif.o \
-		-lpthreads libasync.o -laio -o iozone
+		-pthreads libasync.o -laio -o iozone
 
 #
 # GNU C compiler OSFV4 build 
@@ -578,7 +578,7 @@ OSFV3:	iozone_OSFV3.o libbif.o libasync.o
 #
 
 OSFV4:	iozone_OSFV4.o libbif.o libasync.o
-	$(CC) -O $(LDFLAGS) iozone_OSFV4.o libbif.o -lpthread \
+	$(CC) -O $(LDFLAGS) iozone_OSFV4.o libbif.o -pthread \
 		libasync.o -laio -o iozone
 
 #
@@ -587,7 +587,7 @@ OSFV4:	iozone_OSFV4.o libbif.o libasync.o
 #
 
 OSFV5:	iozone_OSFV5.o libbif.o libasync.o
-	$(CC) -O $(LDFLAGS) iozone_OSFV5.o libbif.o -lpthread \
+	$(CC) -O $(LDFLAGS) iozone_OSFV5.o libbif.o -pthread \
 		libasync.o -laio -o iozone
 
 #
@@ -596,7 +596,7 @@ OSFV5:	iozone_OSFV5.o libbif.o libasync.o
 #
 
 TRU64:	iozone_TRU64.o libbif.o libasync.o
-	$(CC) -O $(LDFLAGS) iozone_TRU64.o libbif.o -lpthread \
+	$(CC) -O $(LDFLAGS) iozone_TRU64.o libbif.o -pthread \
 		libasync.o -laio -o iozone
 
 #
@@ -627,7 +627,7 @@ SCO_Unixware_gcc:	iozone_SCO_Unixware_gcc.o  libbif.o libasync.o
 
 netbsd:		iozone_netbsd.o libbif.o libasync.o fileop_netbsd.o pit_server.o
 	$(CC) -O $(LDFLAGS) iozone_netbsd.o libbif.o libasync.o \
-               -lrt -lpthread -o iozone
+               -lrt -pthread -o iozone
 	$(CC) -O fileop_netbsd.o -o fileop
 	$(CC) -O pit_server.o -o pit_server
 
@@ -636,7 +636,7 @@ netbsd:		iozone_netbsd.o libbif.o libasync.o fileop_netbsd.o pit_server.o
 #
 netbsd-AMD64:  iozone_netbsd-AMD64.o libbif.o libasync.o fileop_netbsd-AMD64.o pit_server.o
 	$(CC)  -O $(LDFLAGS) iozone_netbsd-AMD64.o libbif.o libasync.o \
-		-lrt -lpthread -o iozone
+		-lrt -pthread -o iozone
 	$(CC)  -O fileop_netbsd-AMD64.o -o fileop
 	$(CC)  -O pit_server.o -o pit_server
 
