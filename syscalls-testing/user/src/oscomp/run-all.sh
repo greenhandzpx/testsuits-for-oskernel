@@ -10,7 +10,6 @@ dup
 execve
 exit
 fork
-fstat
 getcwd
 getdents
 getpid
@@ -31,7 +30,7 @@ unlink
 wait
 waitpid
 write
-yield.sh
+yield
 "
 for i in $tests
 do

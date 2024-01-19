@@ -24,7 +24,7 @@
 在Linux上运行测试用例主要是用于对比自己实现的OS
 
 - [syscalls测试用例 for Linux on Qemu RV64运行环境](riscv-linux-rootfs)
-- 对于loongarch赛道的Linux QEMU环境，同学们可以参考[该博客](https://blog.csdn.net/mxcai2005/article/details/129631722)
+- 对于loongarch赛道的Linux QEMU环境，同学们可以参考[该博客](https://blog.csdn.net/mxcai2005/article/details/129631722)自己搭建一个QEMU上的LA架构的Linux，也可以直接使用我们放在release中的已经构建好的虚拟机镜像，里面含有初赛的已编译完成的测试用例，使用方法见[此处](loongarch-linux-qemu).
 
 
 

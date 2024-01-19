@@ -6,7 +6,8 @@
 //#define MNTPOINT "./mnt"
 
 static char mntpoint[64] = "./mnt";
-static char device[64] = "/dev/vda2";
+// static char device[64] = "/dev/vda2";
+static char device[64] = "/dev/vdb";
 static const char *fs_type = "vfat";
 
 void test_mount() {

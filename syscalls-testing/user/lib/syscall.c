@@ -182,11 +182,13 @@ int brk(void *addr)
     return syscall(SYS_brk, addr);
 }
 
-char *getcwd(char *buf, size_t size){
+char *getcwd(char *buf, size_t size)
+{
     return syscall(SYS_getcwd, buf, size);
 }
 
-int chdir(const char *path){
+int chdir(const char *path)
+{
     return syscall(SYS_chdir, path);
 }
 
@@ -194,30 +196,38 @@ int mkdir(const char *path, mode_t mode){
     return syscall(SYS_mkdirat, AT_FDCWD, path, mode);
 }
 
-int getdents(int fd, struct linux_dirent64 *dirp64, unsigned long len){
+int getdents(int fd, struct linux_dirent64 *dirp64, unsigned long len)
+{
     //return syscall(SYS_getdents64, fd, dirp64, len);
     return syscall(SYS_getdents64, fd, dirp64, len);
 }
 
-int pipe(int fd[2]){
+int pipe(int fd[2])
+{
     return syscall(SYS_pipe2, fd, 0);
 }
 
-int dup(int fd){
+int dup(int fd)
+{
     return syscall(SYS_dup, fd);
 }
 
-int dup2(int old, int new){
+int dup2(int old, int new)
+{
     return syscall(SYS_dup3, old, new, 0);
 }
 
 int mount(const char *special, const char *dir, const char *fstype, unsigned long flags, const void *data)
 {
-        return syscall(SYS_mount, special, dir, fstype, flags, data);
+    return syscall(SYS_mount, special, dir, fstype, flags, data);
 }
 
 int umount(const char *special)
 {
-        return syscall(SYS_umount2, special, 0);
+    return syscall(SYS_umount2, special, 0);
 }
 
+int statx(int dirfd, const char *pathname, struct statx *statxbuf)
+{
+    return syscall(SYS_statx, dirfd, pathname, AT_EMPTY_PATH, STATX_BASIC_STATS, statxbuf);
+}

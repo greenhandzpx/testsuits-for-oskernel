@@ -41,7 +41,7 @@
 #define SYS_pivot_root 41
 #define SYS_nfsservctl 42
 #define SYS_statfs 43
-#define SYS_fstatfs 44
+// #define SYS_fstatfs 44
 #define SYS_truncate 45
 #define SYS_ftruncate 46
 #define SYS_fallocate 47

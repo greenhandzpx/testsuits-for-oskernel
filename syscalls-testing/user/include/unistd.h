@@ -49,4 +49,5 @@ int getdents(int fd, struct linux_dirent64 *dirp64, unsigned long len);
 int pipe(int [2]);
 int dup(int);
 int dup2(int, int);
+int statx(int dirfd, const char *pathname, struct statx *statxbuf);
 #endif // __UNISTD_H__

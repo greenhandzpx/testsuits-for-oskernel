@@ -41,7 +41,7 @@
 #define __NR_pivot_root 41
 #define __NR_nfsservctl 42
 #define __NR_statfs 43
-#define __NR_fstatfs 44
+// #define __NR_fstatfs 44
 #define __NR_truncate 45
 #define __NR_ftruncate 46
 #define __NR_fallocate 47
