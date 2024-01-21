@@ -10,7 +10,7 @@ tar xf archlinux-minimal-2023.12.13-loong64.qcow2.tar.gz
 - 编译QEMU
 ```shell
 # 下载QEMU源码
-wget https://download.qemu.org/qemu-7.2.0.tar.xz
+wget https://download.qemu.org/qemu-8.2.0.tar.xz
 # 安装依赖
 sudo apt install clang
 sudo apt-get install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
@@ -31,7 +31,7 @@ cd build/
 ../configure  --enable-slirp --target-list=loongarch64-linux-user,loongarch64-softmmu 
 make -j$(nproc)
 ```
-- 把`QEMU源码路径/qemu-7.2.0/build`添加进环境路径`PATH`
+- 把`QEMU源码路径/qemu-8.2.0/build`添加进环境路径`PATH`
 - 用tmux或者zellij之类的后台任务软件开启一个session，启动虚拟机：
 ```shell
 # 启动QEMU
